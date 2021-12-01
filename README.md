@@ -1,4 +1,4 @@
-#Ass Extractor
+# Ass Extractor
 This simple ass extractor is writen in PHP to use mkvinfo and mkvmerge
 (executables from mkvtoolnix) to extract ASS subtitles tracks and convert them into SRT file.
 
