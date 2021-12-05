@@ -70,7 +70,7 @@ foreach(explode(',',$ids) as $id) {
     $curTrackInfosKey = array_search($id, array_column($useFullTracksInfos, 'id'));
     $curTrackInfos = $useFullTracksInfos[$curTrackInfosKey];
     $subtitleExt = 'ass';
-    $subtitleFileName = $fileNameWithoutExtension.'.'.$curTrackInfos['language_ietf'];
+    $subtitleFileName = $fileNameWithoutExtension.'.'.$curTrackInfos['language'];
     $extractResPath = $dirName.$DS.$subtitleFileName.'.'.$subtitleExt;
     $finalPath = strpos($extractResPath, ' ') !== false ? '"'.$extractResPath.'"' : $extractResPath;
 
@@ -93,7 +93,9 @@ foreach($extractedPaths as $path) {
         $line = trim(fgets($subtitleFile));
     }
     $formatsLine = fgets($subtitleFile);
-    $formats = explode(',', trim(str_replace('Format: ', '', $formatsLine)));
+    $formats = array_map(function($elem) {
+        return trim($elem);
+    }, explode(',', trim(str_replace('Format: ', '', $formatsLine))));
     $formatsNbr = count($formats);
 
     $line = fgets($subtitleFile);
